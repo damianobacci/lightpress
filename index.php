@@ -20,13 +20,14 @@ if ($statement === false)
         <?php require 'templates/title.php' ?>
         <?php while ($row = $statement->fetch(PDO::FETCH_ASSOC)): ?>
             <h2>
-                <?php echo htmlspecialchars($row['title'], ENT_HTML5, 'UTF-8') ?>
+                <?php echo htmlEscape($row['title']) ?>
             </h2>
             <div>
-                <?php echo $row['created_at'] ?>
+                <?php echo convertSqlDate($row['created_at']) ?>
+                (<?php echo countCommentsForPost($row['id']) ?> comments)
             </div>
             <p>
-                <?php echo htmlspecialchars($row['body'], ENT_HTML5, 'UTF-8') ?>
+                <?php echo htmlEscape($row['body']) ?>
             </p>
             <p>
                 <a

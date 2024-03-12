@@ -1,2 +1,2 @@
-<h1>Blog title</h1>
-<p>This paragraph summarises what the blog is about.</p>
+<a href="index.php"><h1>Lightpress</h1></a>
+<p>A simple CMS made in PHP.</p>
