@@ -7,9 +7,10 @@
 
 <?php // We'll use a rule-off for now, to separate page sections ?>
 <hr />
+
 <?php // Report any errors in a bullet-point list ?>
 <?php if ($errors): ?>
-    <div style="border: 1px solid #ff6666; padding: 6px;">
+    <div class="error box">
         <ul>
             <?php foreach ($errors as $error): ?>
                 <li><?php echo $error ?></li>
@@ -17,7 +18,9 @@
         </ul>
     </div>
 <?php endif ?>
+
 <h3>Add your comment</h3>
+
 <form method="post">
     <p>
         <label for="comment-name">
@@ -27,7 +30,7 @@
             type="text"
             id="comment-name"
             name="comment-name"
-            value="<?php echo @htmlEscape($commentData['name']) ?>"
+            value="<?php echo htmlEscape($commentData['name']) ?>"
         />
     </p>
     <p>
@@ -38,7 +41,7 @@
             type="text"
             id="comment-website"
             name="comment-website"
-            value="<?php echo @htmlEscape($commentData['website']) ?>"
+            value="<?php echo htmlEscape($commentData['website']) ?>"
         />
     </p>
     <p>
@@ -50,7 +53,8 @@
             name="comment-text"
             rows="8"
             cols="70"
-        ><?php echo @htmlEscape($commentData['text']) ?></textarea>
+        ><?php echo htmlEscape($commentData['text']) ?></textarea>
     </p>
+
     <input type="submit" value="Submit comment" />
 </form>

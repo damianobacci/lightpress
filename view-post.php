@@ -24,6 +24,7 @@ if (!$row)
 {
     redirectAndExit('index.php?not-found=1');
 }
+
 $errors = null;
 if ($_POST)
 {
@@ -37,11 +38,20 @@ if ($_POST)
         $postId,
         $commentData
     );
+
     // If there are no errors, redirect back to self and redisplay
     if (!$errors)
     {
         redirectAndExit('view-post.php?post_id=' . $postId);
     }
+}
+else
+{
+    $commentData = array(
+        'name' => '',
+        'website' => '',
+        'text' => '',
+    );
 }
 
 ?>
@@ -49,24 +59,25 @@ if ($_POST)
 <html>
     <head>
         <title>
-            Lightpress |
+            A blog application |
             <?php echo htmlEscape($row['title']) ?>
         </title>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <?php require 'templates/head.php' ?>
     </head>
     <body>
         <?php require 'templates/title.php' ?>
+
         <h2>
             <?php echo htmlEscape($row['title']) ?>
         </h2>
         <div>
             <?php echo convertSqlDate($row['created_at']) ?>
         </div>
-        <p>
-            <?php // This is already escaped, so doesn't need further escaping ?>
+        <?php // This is already escaped, so doesn't need further escaping ?>
         <?php echo convertNewlinesToParagraphs($row['body']) ?>
-        </p>
+
         <h3><?php echo countCommentsForPost($postId) ?> comments</h3>
+
         <?php foreach (getCommentsForPost($postId) as $comment): ?>
             <?php // For now, we'll use a horizontal rule-off to split it up a bit ?>
             <hr />
@@ -83,6 +94,7 @@ if ($_POST)
                 </div>
             </div>
         <?php endforeach ?>
+
         <?php require 'templates/comment-form.php' ?>
     </body>
 </html>

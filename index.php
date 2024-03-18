@@ -20,9 +20,14 @@ $notFound = isset($_GET['not-found']);
 <!DOCTYPE html>
 <html>
     <head>
+        <title>A blog application</title>
+        <?php require 'templates/head.php' ?>
+    </head>
+    </head>
+    <body>
         <?php require 'templates/title.php' ?>
         <?php if ($notFound): ?>
-            <div style="border: 1px solid #ff6666; padding: 6px;">
+            <div class="error box">
                 Error: cannot find the requested blog post
             </div>
         <?php endif ?>
