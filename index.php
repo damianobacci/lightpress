@@ -1,5 +1,6 @@
 <?php
 require_once 'lib/common.php';
+session_start();
 $pdo = getPDO();
 $statement = $pdo->query(
     'SELECT
@@ -27,7 +28,7 @@ $notFound = isset($_GET['not-found']);
         <?php endif ?>
         <?php while ($row = $statement->fetch(PDO::FETCH_ASSOC)): ?>
             <h2>
-                <?php echo htmlEscape($row['title']) ?>
+               <a href="view-post.php?post_id=<?php echo $row['id'] ?>"><?php echo htmlEscape($row['title']) ?></a> 
             </h2>
             <div>
                 <?php echo convertSqlDate($row['created_at']) ?>

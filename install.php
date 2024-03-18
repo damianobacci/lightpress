@@ -8,7 +8,18 @@ if ($_POST)
 {
     // Here's the install
      $pdo = getPDO();
-    list($_SESSION['count'], $_SESSION['error']) = installBlog($pdo);
+     list($rowCounts, $error) = installBlog($pdo);
+      $password = '';
+    if (!$error)
+    {
+        $username = 'admin';
+        list($password, $error) = createUser($pdo, $username);
+    }
+    $_SESSION['count'] = $rowCounts;
+    $_SESSION['error'] = $error;
+    $_SESSION['username'] = $username;
+    $_SESSION['password'] = $password;
+    $_SESSION['try-install'] = true;
     // ... and here we redirect from POST to GET
     redirectAndExit('install.php');
 }
